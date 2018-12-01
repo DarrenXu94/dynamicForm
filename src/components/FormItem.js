@@ -12,8 +12,18 @@ class FormItem extends Component {
                 break
             case 'textarea':
                 renderForm = <textarea name={item.key} rows={item.textarea.rows} cols={item.textarea.cols} value={thisValue} onChange={this.props.onChange} placeholder={item.key}/>
-                break    
+                break 
+            case 'dropdown':
+                renderForm = <select name={item.key} onChange={this.props.onChange} defaultValue="none">
+                <option value="none">None</option>
+                {item.select.options.map(option => {
+                    return <option key={option.value} value={option.value} >{option.text}</option>
+                })}
+
+                </select>
+                break       
             default:
+                renderForm = <p>Invalid form</p>
                 break
         }
         return (
