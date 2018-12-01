@@ -21,9 +21,13 @@ class FormItem extends Component {
                 })}
 
                 </select>
-                break       
+                break    
+            case 'checkbox':
+                renderForm =  <input type="checkbox" name={item.key} checked={thisValue} onChange={this.props.onChange} />
+
+                break
             default:
-                renderForm = <p>Invalid form</p>
+                renderForm = <p>Invalid form item</p>
                 break
         }
         return (

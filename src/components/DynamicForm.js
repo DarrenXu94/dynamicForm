@@ -5,7 +5,9 @@ class DynamicForm extends Component {
     state = {
     }
     onChange = (e) => {
-        this.setState({[e.target.name]:e.target.value})
+        const target = e.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        this.setState({[e.target.name]:value})
     }
     onSubmit = (e) => {
         e.preventDefault()

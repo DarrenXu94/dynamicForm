@@ -9,7 +9,8 @@ const jsonPattern = {
             {value: 'england', text: 'England'},
             {value: 'canada', text: 'Canada'}
 
-        ]}}
+        ]}},
+        {key:"React", type:"checkbox"}
 
 
     ]
