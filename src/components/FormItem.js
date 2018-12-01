@@ -8,10 +8,10 @@ class FormItem extends Component {
 
         switch(item.type){
             case 'text':
-                renderForm =  <input type="text" name={item.key} value={thisValue} onChange={this.props.onChange} placeholder={item.key}/>
+                renderForm = <label> {item.text} <br /> <input type="text" name={item.key} value={thisValue} onChange={this.props.onChange} placeholder={item.key}/> </label>
                 break
             case 'textarea':
-                renderForm = <textarea name={item.key} rows={item.textarea.rows} cols={item.textarea.cols} value={thisValue} onChange={this.props.onChange} placeholder={item.key}/>
+                renderForm = <label> {item.text} <br /><textarea name={item.key} rows={item.textarea.rows} cols={item.textarea.cols} value={thisValue} onChange={this.props.onChange} placeholder={item.key}/></label>
                 break 
             case 'dropdown':
                 renderForm = <select name={item.key} onChange={this.props.onChange} defaultValue="none">

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FormItem from './FormItem'
+import PropTypes from 'prop-types';
+import Config from './Config'
 
 class DynamicForm extends Component {
     state = {
@@ -11,10 +13,10 @@ class DynamicForm extends Component {
     }
     onSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
+        this.props.onSubmit(this.state)
     }
     render() {
-        let { title, model } = this.props.config.jsonPattern
+        let { title, model } = this.props.config
         return (
             <form>
                 <h4>{title}</h4>
@@ -29,4 +31,7 @@ class DynamicForm extends Component {
 
 export default DynamicForm;
 
-// Props config {title, model: []}
+DynamicForm.propTypes = {
+    config: PropTypes.instanceOf(Config),
+    onSubmit: PropTypes.func.isRequired
+}
