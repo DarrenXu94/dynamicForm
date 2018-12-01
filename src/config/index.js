@@ -10,7 +10,7 @@ const jsonPattern = {
             {value: 'canada', text: 'Canada'}
 
         ]}},
-        {key:"React", type:"checkbox"}
+        {key:"React", type:"checkbox", text:"Understands React"}
 
 
     ]

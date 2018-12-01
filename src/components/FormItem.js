@@ -23,7 +23,7 @@ class FormItem extends Component {
                 </select>
                 break    
             case 'checkbox':
-                renderForm =  <input type="checkbox" name={item.key} checked={thisValue} onChange={this.props.onChange} />
+                renderForm = <label> <input type="checkbox" name={item.key} checked={thisValue} onChange={this.props.onChange} /> {item.text} </label>
 
                 break
             default:
