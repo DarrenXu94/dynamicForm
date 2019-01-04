@@ -20,10 +20,13 @@ class DynamicForm extends Component {
         return (
             <form>
                 <h4>{title}</h4>
+                {/* <textarea value={JSON.stringify(this.props.config, null, 2)} rows="20" cols="50" readOnly/> */}
+
                 { model.map(item => {
                     return <FormItem key={item.key} item={item} onChange={this.onChange} formValues={this.state}/>
                     }) }
                 <button onClick={this.onSubmit}>Submit</button>
+                {/* <hr /> */}
             </form>
         );
     }
