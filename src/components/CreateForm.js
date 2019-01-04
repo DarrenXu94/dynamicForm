@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import DynamicForm from './DynamicForm'
 import Config from './Config';
 
+import CheckboxConfig from './CreateFormConfigs.js/CheckboxConfig'
+import TextareaConfig from './CreateFormConfigs.js/TextareaConfig'
+
 let jsonConfig = {
     title: 'Add a new form',
     model: [
@@ -15,13 +18,6 @@ let jsonConfig = {
                 ]
             }
         }
-    ]
-}
-
-let checkboxConfig = {
-    title: 'Checkbox text',
-    model: [
-        {key:"text", type:"text"}
     ]
 }
 
@@ -42,12 +38,24 @@ class CreateForm extends Component {
     }
     onChange = (e) => {
         const target = e.target;
-        if (target.value === "checkbox") {
-            let chkConfig = new Config(checkboxConfig.title, checkboxConfig.model)
-            let tmpExtraForms = this.state.extraForms
-            tmpExtraForms.push(chkConfig)
-            this.setState({extraForms: tmpExtraForms})
+        console.log(target.name)
+        if (target.name === 'type'){
+            console.log('reached type')
+
+            switch(target.value) {
+                case('checkbox'):
+                    let chkConfig = CheckboxConfig
+                    this.setState({extraForms: [chkConfig]})
+                    break;
+                case('textarea'):
+                    let txtareaConfig = TextareaConfig
+                    this.setState({extraForms: [txtareaConfig]})
+                    break;   
+                default:
+                    this.setState({extraForms: [], extraFormFields: {}})    
+            }
         }
+
     }
     onExtraformSubmit = (e) => {
         console.log('extra form submit',e)
