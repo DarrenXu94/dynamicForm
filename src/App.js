@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import DynamicForm from './components/DynamicForm'
 
 import CreateForm from './components/CreateForm'
 import DisplayForm from './components/DisplayForm'

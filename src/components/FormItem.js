@@ -11,7 +11,10 @@ class FormItem extends Component {
                 renderForm = <label> {item.text} <br /> <input type="text" name={item.key} value={thisValue} onChange={this.props.onChange} placeholder={item.key}/> </label>
                 break
             case 'textarea':
-                renderForm = <label> {item.key} <br /><textarea name={item.key} rows={item.textarea.rows} cols={item.textarea.cols} value={thisValue} onChange={this.props.onChange} placeholder={item.text}/></label>
+                let rows = (item.textarea === undefined) ? 20 : item.textarea.rows ;
+                let cols = (item.textarea === undefined) ? 40 : item.textarea.cols ;
+
+                renderForm = <label> {item.key} <br /><textarea name={item.key} rows={rows} cols={cols} value={thisValue} onChange={this.props.onChange} placeholder={item.text}/></label>
                 break 
             case 'dropdown':
                 renderForm = <select name={item.key} onChange={this.props.onChange} defaultValue="none">
