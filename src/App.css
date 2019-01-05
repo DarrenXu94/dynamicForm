@@ -1,0 +1,9 @@
+.App {
+    padding: 2.2rem;
+   
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}

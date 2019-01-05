@@ -9,9 +9,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <h3>Dynamically generate forms from JSON</h3>
-          <DisplayForm />
+        <h3>Dynamically generate forms from JSON</h3>
+        <div className="wrapper">
           <CreateForm />
+          <DisplayForm />
+        </div>
       </div>
     );
   }

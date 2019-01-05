@@ -4,6 +4,8 @@ import Config from './Config';
 
 import CheckboxConfig from './CreateFormConfigs.js/CheckboxConfig'
 import TextareaConfig from './CreateFormConfigs.js/TextareaConfig'
+import DropdownConfig from './CreateFormConfigs.js/DropdownConfig'
+
 
 let jsonConfig = {
     title: 'Add a new form',
@@ -14,7 +16,9 @@ let jsonConfig = {
                 default: 'text', options: [
                     { value: 'text', text: 'Text' },
                     { value: 'textarea', text: 'Textarea' },
-                    { value: 'checkbox', text: 'Checkbox' }
+                    { value: 'checkbox', text: 'Checkbox' },
+                    { value: 'dropdown', text: 'Dropdown' }
+
                 ]
             }
         }
@@ -22,6 +26,23 @@ let jsonConfig = {
 }
 
 let config = new Config(jsonConfig.title, jsonConfig.model)
+
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const stringToDropdownValues = (data) => {
+    let res = {select: {}}
+    let inputs = data.trim().split(',')
+    let options = inputs.map(value => {
+        return {value: value, text: capitalizeFirstLetter(value)}
+    })
+    res.select.default = options[0].value
+    res.select.options = options
+    
+    return res
+}
+
 
 class CreateForm extends Component {
     state = {
@@ -31,17 +52,26 @@ class CreateForm extends Component {
     }
     onSubmit = (form) => {
         let tempForm = this.state.currentForm
-        let merged = {...form, ...this.state.extraFormFields};
+        let eff = this.state.extraFormFields
+        let hasExtraFields = Object.keys(eff).length !== 0 
+        let merged
+        if (hasExtraFields){
+            if ('dropdownConfig' in eff) {
+                let res = stringToDropdownValues(eff.dropdownConfig)
+                merged = {...form,...res}
+            } else {
+                merged = {...form, ...eff};
+            }
+        } else {
+            merged = {...form, ...eff};
+        }
 
         tempForm.model.push(merged)
         this.setState({currentForm: tempForm})
     }
     onChange = (e) => {
         const target = e.target;
-        console.log(target.name)
         if (target.name === 'type'){
-            console.log('reached type')
-
             switch(target.value) {
                 case('checkbox'):
                     let chkConfig = CheckboxConfig
@@ -51,6 +81,10 @@ class CreateForm extends Component {
                     let txtareaConfig = TextareaConfig
                     this.setState({extraForms: [txtareaConfig]})
                     break;   
+                case('dropdown'):
+                    let dropdownConfig = DropdownConfig
+                    this.setState({extraForms: [dropdownConfig]})
+                    break;
                 default:
                     this.setState({extraForms: [], extraFormFields: {}})    
             }
@@ -58,9 +92,7 @@ class CreateForm extends Component {
 
     }
     onExtraformSubmit = (e) => {
-        console.log('extra form submit',e)
         this.setState({extraFormFields: e})
- 
     }
     render() {
         let { extraForms } = this.state

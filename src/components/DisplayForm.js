@@ -4,7 +4,7 @@ import Config from './Config';
 import config from '../config'
 
 let textareaConfig = {
-    title: 'Checkbox text',
+    title: 'Paste your form code here',
     model: [
         // {key:"Form", type:"textarea",text: "Paste your form here", textarea: {rows: 4, cols: 50}},
         {key:"Form", type:"textarea",text: JSON.stringify(config), textarea: {rows: 4, cols: 50}}
@@ -31,7 +31,8 @@ class DisplayForm extends Component {
             <div>
                 <DynamicForm config={txtConfig} onSubmit={this.onSubmit} onChange={()=>{}}/>
                 <hr />
-                <DynamicForm config={config} onSubmit={()=> {}} onChange={()=>{}}/>
+                <h4>Form Generated</h4>
+                <DynamicForm config={config} onSubmit={(e)=> {console.log(e)}} onChange={()=>{}}/>
                 <hr />
 
             </div>
