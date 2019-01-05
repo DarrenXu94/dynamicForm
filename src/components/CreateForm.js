@@ -50,6 +50,21 @@ class CreateForm extends Component {
         extraForms: [],
         extraFormFields: {}
     }
+
+    copyToClipboard = str => {
+        const el = document.createElement('textarea');
+        el.value = str;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    };
+
+    onCopyToKeyboard = (e) => {
+        e.preventDefault()
+        this.copyToClipboard(JSON.stringify(this.state.currentForm, null, 2))
+    }
+
     onSubmit = (form) => {
         let tempForm = this.state.currentForm
         let eff = this.state.extraFormFields
@@ -103,6 +118,8 @@ class CreateForm extends Component {
                     return <DynamicForm key={f.title} config={f} onSubmit={this.onExtraformSubmit} onChange={()=>{}}/>
                 })}
                 <textarea value={JSON.stringify(this.state.currentForm, null, 2)} rows="20" cols="50" readOnly/>
+                <br />
+                <button onClick={this.onCopyToKeyboard}>Copy to clipboard</button>
             </div>
         );
     }
