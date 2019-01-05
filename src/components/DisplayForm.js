@@ -7,7 +7,7 @@ let textareaConfig = {
     title: 'Paste your form code here',
     model: [
         // {key:"Form", type:"textarea",text: "Paste your form here", textarea: {rows: 4, cols: 50}},
-        { key: "Form_Input", type: "textarea", text: JSON.stringify(config), textarea: { rows: 4, cols: 50 } }
+        { key: "Form", type: "textarea", text: JSON.stringify(config), textarea: { rows: 4, cols: 50 } }
 
     ]
 }
@@ -21,7 +21,7 @@ class DisplayForm extends Component {
 
     onSubmit = (e) => {
         // console.log(e)
-        let jsonForm = JSON.parse(e.Form_Input)
+        let jsonForm = JSON.parse(e.Form)
         console.log(jsonForm)
         let jsonFormConfig = new Config(jsonForm.title, jsonForm.model)
         this.setState({ config: jsonFormConfig })
