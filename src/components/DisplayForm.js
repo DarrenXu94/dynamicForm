@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import DynamicForm from './DynamicForm'
 import Config from './Config';
 import config from '../config'
@@ -29,7 +29,7 @@ class DisplayForm extends Component {
     render() {
         let { config } = this.state
         return (
-            <div className="display-wrapper ">
+            <Fragment>
                 <div>
                     <DynamicForm config={txtConfig} onSubmit={this.onSubmit} onChange={() => { }} />
                 </div>
@@ -37,7 +37,7 @@ class DisplayForm extends Component {
                     <h4>Form Generated</h4>
                     <DynamicForm config={config} onSubmit={(e) => { console.log(e) }} onChange={() => { }} />
                 </div>
-            </div>
+            </Fragment>
         );
     }
 }

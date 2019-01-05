@@ -25,7 +25,7 @@ class DynamicForm extends Component {
                 { model.map(item => {
                     return <FormItem key={item.key} item={item} onChange={this.onChange} formValues={this.state}/>
                     }) }
-                <button onClick={this.onSubmit}>Submit</button>
+                <button disabled={this.props.isDisabled} onClick={this.onSubmit}>Submit</button>
             </form>
         );
     }
@@ -36,5 +36,6 @@ export default DynamicForm;
 DynamicForm.propTypes = {
     config: PropTypes.instanceOf(Config),
     onSubmit: PropTypes.func.isRequired,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    isDisabled: PropTypes.bool
 }

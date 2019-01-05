@@ -48,7 +48,8 @@ class CreateForm extends Component {
     state = {
         currentForm: {title:'test', model: []},
         extraForms: [],
-        extraFormFields: {}
+        extraFormFields: {},
+        readyToSubmit: true
     }
 
     copyToClipboard = str => {
@@ -87,6 +88,7 @@ class CreateForm extends Component {
     onChange = (e) => {
         const target = e.target;
         if (target.name === 'type'){
+            this.setState({readyToSubmit: false})
             switch(target.value) {
                 case('checkbox'):
                     let chkConfig = CheckboxConfig
@@ -101,19 +103,20 @@ class CreateForm extends Component {
                     this.setState({extraForms: [dropdownConfig]})
                     break;
                 default:
-                    this.setState({extraForms: [], extraFormFields: {}})    
+                    this.setState({extraForms: [], extraFormFields: {}, readyToSubmit: true})    
             }
         }
 
     }
     onExtraformSubmit = (e) => {
-        this.setState({extraFormFields: e})
+        this.setState({extraFormFields: e, readyToSubmit: true})
     }
     render() {
-        let { extraForms } = this.state
+        let { extraForms, readyToSubmit } = this.state
         return (
             <div>
-                <DynamicForm config={config} onSubmit={this.onSubmit} onChange={this.onChange}/>
+                {readyToSubmit.toString()}
+                <DynamicForm config={config} onSubmit={this.onSubmit} onChange={this.onChange} isDisabled={!readyToSubmit}/>
                 { extraForms !== [] && extraForms.map(f => {
                     return <DynamicForm key={f.title} config={f} onSubmit={this.onExtraformSubmit} onChange={()=>{}}/>
                 })}
