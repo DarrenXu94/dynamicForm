@@ -14,7 +14,7 @@ class FormItem extends Component {
                 let rows = (item.textarea === undefined) ? 20 : item.textarea.rows ;
                 let cols = (item.textarea === undefined) ? 40 : item.textarea.cols ;
 
-                renderForm = <label> {item.key} <br /><textarea name={item.key} rows={rows} cols={cols} value={thisValue} onChange={this.props.onChange} placeholder={item.text}/></label>
+                renderForm = <label> {item.key} <br /><textarea id={item.key} name={item.key} rows={rows} cols={cols} value={thisValue} onChange={this.props.onChange} placeholder={item.text}/></label>
                 break 
             case 'dropdown':
                 renderForm = <select name={item.key} onChange={this.props.onChange} defaultValue="none">

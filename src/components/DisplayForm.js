@@ -7,7 +7,7 @@ let textareaConfig = {
     title: 'Paste your form code here',
     model: [
         // {key:"Form", type:"textarea",text: "Paste your form here", textarea: {rows: 4, cols: 50}},
-        {key:"Form", type:"textarea",text: JSON.stringify(config), textarea: {rows: 4, cols: 50}}
+        { key: "Form_Input", type: "textarea", text: JSON.stringify(config), textarea: { rows: 4, cols: 50 } }
 
     ]
 }
@@ -16,25 +16,27 @@ let txtConfig = new Config(textareaConfig.title, textareaConfig.model)
 
 class DisplayForm extends Component {
     state = {
-        config:  config
+        config: config
     }
+
     onSubmit = (e) => {
         // console.log(e)
-        let jsonForm = JSON.parse(e.Form)
+        let jsonForm = JSON.parse(e.Form_Input)
         console.log(jsonForm)
         let jsonFormConfig = new Config(jsonForm.title, jsonForm.model)
-        this.setState({config: jsonFormConfig})
+        this.setState({ config: jsonFormConfig })
     }
     render() {
-        let {config} = this.state
+        let { config } = this.state
         return (
-            <div>
-                <DynamicForm config={txtConfig} onSubmit={this.onSubmit} onChange={()=>{}}/>
-                <hr />
-                <h4>Form Generated</h4>
-                <DynamicForm config={config} onSubmit={(e)=> {console.log(e)}} onChange={()=>{}}/>
-                <hr />
-
+            <div className="display-wrapper ">
+                <div>
+                    <DynamicForm config={txtConfig} onSubmit={this.onSubmit} onChange={() => { }} />
+                </div>
+                <div>
+                    <h4>Form Generated</h4>
+                    <DynamicForm config={config} onSubmit={(e) => { console.log(e) }} onChange={() => { }} />
+                </div>
             </div>
         );
     }
